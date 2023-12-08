@@ -1,8 +1,15 @@
 <div class="row mt-5">
   <div class="col-md-5">
-    <app-recipe-list></app-recipe-list>
+    <app-recipe-list
+      (onActiveRecipeChange)="onChangeActiveRecipe($event)"
+      [activeRecipe]="activeRecipe"
+    ></app-recipe-list>
   </div>
   <div class="col-md-7">
-    <app-recipe-detail></app-recipe-detail>
+    @if(activeRecipe){
+    <app-recipe-detail [activeRecipe]="activeRecipe"></app-recipe-detail>
+    } @else {
+    <p>Please select a recipe</p>
+    }
   </div>
 </div>

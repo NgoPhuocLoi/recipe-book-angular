@@ -1,5 +1,8 @@
-<app-header></app-header>
+<app-header (selectedPage)="onChangedPage($event)"></app-header>
 <div class="container">
+  @if(loadedPage === 'recipe'){
   <app-recipe></app-recipe>
+  } @if(loadedPage === 'shopping-list'){
   <app-shopping-list></app-shopping-list>
+  }
 </div>
