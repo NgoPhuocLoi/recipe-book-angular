@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Recipe } from './recipe.model';
+import RecipeService from './recipe.service';
 
 @Component({
   selector: 'app-recipe',
@@ -9,7 +10,9 @@ import { Recipe } from './recipe.model';
 export class RecipeComponent {
   activeRecipe: Recipe = null;
 
-  onChangeActiveRecipe(recipe: Recipe) {
-    this.activeRecipe = recipe;
+  constructor(private recipeService: RecipeService) {
+    this.recipeService.activeRecipeUpdated.subscribe((recipe) => {
+      this.activeRecipe = recipe;
+    });
   }
 }

@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Recipe } from '../recipe.model';
+import RecipeService from '../recipe.service';
 
 @Component({
   selector: 'app-recipe-item',
@@ -8,5 +9,10 @@ import { Recipe } from '../recipe.model';
 })
 export class RecipeItemComponent {
   @Input() recipe: Recipe;
-  @Input() active: boolean;
+  active: boolean = false;
+  constructor(private recipeService: RecipeService) {
+    this.recipeService.activeRecipeUpdated.subscribe((activeRecipe) => {
+      this.active = activeRecipe.name === this.recipe.name;
+    });
+  }
 }
