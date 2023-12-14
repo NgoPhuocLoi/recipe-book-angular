@@ -9,6 +9,8 @@ import { RecipeListComponent } from './recipe/recipe-list/recipe-list.component'
 import { ShoppingEditComponent } from './shopping/shopping-edit/shopping-edit.component';
 import { ShoppingListComponent } from './shopping/shopping-list/shopping-list.component';
 import { RecipeComponent } from './recipe/recipe.component';
+import { RouterModule } from '@angular/router';
+import { routes } from './app.routes';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,7 @@ import { RecipeComponent } from './recipe/recipe.component';
     ShoppingEditComponent,
     RecipeComponent,
   ],
-  imports: [BrowserModule],
+  imports: [BrowserModule, RouterModule.forRoot(routes)],
   providers: [],
   bootstrap: [AppComponent],
 })
