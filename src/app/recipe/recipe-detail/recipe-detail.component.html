@@ -1,12 +1,12 @@
 <div class="row mb-2">
   <div class="col-xs-12">
-    <img class="w-25" [src]="activeRecipe.imagePath" alt="" />
+    <img class="w-25" [src]="recipe.imagePath" alt="" />
   </div>
 </div>
 
 <div class="row">
   <div class="col-xs-12">
-    <h1>{{ activeRecipe.name }}</h1>
+    <h1>{{ recipe.name }}</h1>
   </div>
 </div>
 
@@ -30,7 +30,7 @@
             >Add ingredients to shopping list</a
           >
         </li>
-        <li><a class="dropdown-item" href="#">Edit recipe</a></li>
+        <li><a class="dropdown-item" routerLink="edit">Edit recipe</a></li>
         <li><a class="dropdown-item" href="#">Delete recipe</a></li>
       </ul>
     </div>
@@ -38,12 +38,12 @@
 </div>
 
 <div class="row py-2">
-  <div class="col-xs-12">{{ activeRecipe.description }}</div>
+  <div class="col-xs-12">{{ recipe.description }}</div>
 </div>
 <div class="row">
   <div class="col-xs-12">
     <ul class="list-group">
-      @for(ingredient of activeRecipe.ingredients; track ingredient.name){
+      @for(ingredient of recipe.ingredients; track ingredient.name){
       <a href="" class="list-group-item">
         {{ ingredient.name }} ({{ ingredient.amount }})
       </a>

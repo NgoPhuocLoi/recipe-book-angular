@@ -11,6 +11,8 @@ import { ShoppingListComponent } from './shopping/shopping-list/shopping-list.co
 import { RecipeComponent } from './recipe/recipe.component';
 import { RouterModule } from '@angular/router';
 import { routes } from './app.routes';
+import { RecipeStartComponent } from './recipe/recipe-start/recipe-start.component';
+import { RecipeEditComponent } from './recipe/recipe-edit/recipe-edit.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { routes } from './app.routes';
     RecipeDetailComponent,
     ShoppingEditComponent,
     RecipeComponent,
+    RecipeStartComponent,
+    RecipeEditComponent,
   ],
   imports: [BrowserModule, RouterModule.forRoot(routes)],
   providers: [],
