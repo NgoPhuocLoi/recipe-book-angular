@@ -26,8 +26,6 @@ export default class RecipeService {
     ),
   ];
 
-  public activeRecipeUpdated = new EventEmitter<Recipe>();
-
   getRecipe() {
     return this.recipes.slice();
   }

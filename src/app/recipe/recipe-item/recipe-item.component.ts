@@ -9,11 +9,4 @@ import RecipeService from '../recipe.service';
 })
 export class RecipeItemComponent {
   @Input() recipe: Recipe;
-  active: boolean = false;
-
-  constructor(private recipeService: RecipeService) {
-    this.recipeService.activeRecipeUpdated.subscribe((activeRecipe) => {
-      this.active = activeRecipe.name === this.recipe.name;
-    });
-  }
 }

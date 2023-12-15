@@ -7,12 +7,4 @@ import RecipeService from './recipe.service';
   templateUrl: './recipe.component.html',
   styleUrl: './recipe.component.css',
 })
-export class RecipeComponent {
-  activeRecipe: Recipe = null;
-
-  constructor(private recipeService: RecipeService) {
-    this.recipeService.activeRecipeUpdated.subscribe((recipe) => {
-      this.activeRecipe = recipe;
-    });
-  }
-}
+export class RecipeComponent {}
