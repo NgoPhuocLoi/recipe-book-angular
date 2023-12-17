@@ -1,11 +1,15 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export default class RecipeService {
+  private recipesStateSubject = new Subject<Recipe[]>();
+  recipesState = this.recipesStateSubject.asObservable();
+
   public recipes: Recipe[] = [
     new Recipe(
       1,
@@ -26,15 +30,26 @@ export default class RecipeService {
     ),
   ];
 
-  getRecipe() {
+  getRecipes() {
     return this.recipes.slice();
   }
 
   addRecipe(recipe: Recipe) {
     this.recipes.push(recipe);
+    this.recipesStateSubject.next(this.recipes);
   }
 
   getById(id: number) {
     return this.recipes.find((r) => r.id === id);
+  }
+
+  updateRecipeById(id: number, updatedRecipe: Recipe) {
+    this.recipes = this.recipes.map((r) => (r.id === id ? updatedRecipe : r));
+    this.recipesStateSubject.next(this.recipes);
+  }
+
+  deleteById(id: number) {
+    this.recipes = this.recipes.filter((r) => r.id !== id);
+    this.recipesStateSubject.next(this.recipes);
   }
 }

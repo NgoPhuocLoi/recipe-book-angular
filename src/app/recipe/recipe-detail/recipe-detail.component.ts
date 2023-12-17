@@ -15,6 +15,7 @@ export class RecipeDetailComponent {
   private route = inject(ActivatedRoute);
   private shoppingService = inject(ShoppingService);
   private router = inject(Router);
+  private recipeService = inject(RecipeService);
 
   ngOnInit(): void {
     this.route.data.subscribe((data) => {
@@ -25,5 +26,10 @@ export class RecipeDetailComponent {
   onAddIngredientsToShoppingList() {
     this.shoppingService.addIngredients(this.recipe.ingredients);
     this.router.navigateByUrl('/shopping-list');
+  }
+
+  onDelete() {
+    this.recipeService.deleteById(+this.route.snapshot.params['id']);
+    this.router.navigateByUrl('/recipe');
   }
 }

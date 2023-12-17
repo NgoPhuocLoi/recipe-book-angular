@@ -13,7 +13,7 @@ import { RouterModule } from '@angular/router';
 import { routes } from './app.routes';
 import { RecipeStartComponent } from './recipe/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipe/recipe-edit/recipe-edit.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,7 +28,12 @@ import { FormsModule } from '@angular/forms';
     RecipeStartComponent,
     RecipeEditComponent,
   ],
-  imports: [BrowserModule, RouterModule.forRoot(routes), FormsModule],
+  imports: [
+    BrowserModule,
+    RouterModule.forRoot(routes),
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

@@ -1,1 +1,97 @@
-<p>recipe-edit works!</p>
+<div class="row">
+  <div class="col-xs-12">
+    <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <button
+          class="btn btn-success"
+          type="submit"
+          [disabled]="!recipeForm.valid"
+        >
+          Save
+        </button>
+        <button class="btn btn-danger ms-2" type="button" (click)="onCancel()">
+          Cancel
+        </button>
+      </div>
+
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          aria-describedby="nameHelp"
+          formControlName="name"
+        />
+        <div id="nameHelp" class="form-text">
+          We'll never share your email with anyone else.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="name" class="form-label">Image URL</label>
+        <input
+          type="text"
+          class="form-control"
+          id="imagePath"
+          aria-describedby="imageHelp"
+          formControlName="imagePath"
+        />
+        <div id="imageHelp" class="form-text">
+          We'll never share your email with anyone else.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <img class="w-100" [src]="recipeForm.value.imagePath" alt="" />
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea
+          class="form-control"
+          id="description"
+          rows="3"
+          formControlName="description"
+        ></textarea>
+      </div>
+
+      <div class="mb-3" formArrayName="ingredients">
+        @for(ingredientControl of ingredientControls.controls; let i = $index;
+        track i){
+        <div class="row mb-2" formGroupName="{{ i }}">
+          <div class="col-8">
+            <input type="text" class="form-control" formControlName="name" />
+          </div>
+          <div class="col-2">
+            <input
+              type="number"
+              class="form-control"
+              formControlName="amount"
+            />
+          </div>
+          <div class="col-2">
+            <button
+              class="btn btn-danger"
+              type="button"
+              (click)="onDeleteIngredient(i)"
+            >
+              X
+            </button>
+          </div>
+        </div>
+        }
+      </div>
+
+      <div>
+        <button
+          class="btn btn-success"
+          type="button"
+          (click)="onAddIngredient()"
+        >
+          Add ingredient
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

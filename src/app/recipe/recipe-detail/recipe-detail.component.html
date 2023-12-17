@@ -28,7 +28,11 @@
           >
         </li>
         <li><a class="dropdown-item" routerLink="edit">Edit recipe</a></li>
-        <li><a class="dropdown-item" href="#">Delete recipe</a></li>
+        <li>
+          <a class="dropdown-item" type="button" (click)="onDelete()"
+            >Delete recipe</a
+          >
+        </li>
       </ul>
     </div>
   </div>
