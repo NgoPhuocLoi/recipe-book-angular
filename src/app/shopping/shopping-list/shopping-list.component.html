@@ -5,10 +5,10 @@
     ></app-shopping-edit>
     <hr />
     <ul class="list-group">
-      @for(ingredient of ingredients; track ingredient.name){
-      <a href="" class="list-group-item">
+      @for(ingredient of ingredients; track ingredient.name; let i = $index){
+      <li style="cursor: pointer" class="list-group-item" (click)="onEdit(i)">
         {{ ingredient.name }} ({{ ingredient.amount }})
-      </a>
+      </li>
       }
     </ul>
   </div>

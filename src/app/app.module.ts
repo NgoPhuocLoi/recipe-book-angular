@@ -13,6 +13,7 @@ import { RouterModule } from '@angular/router';
 import { routes } from './app.routes';
 import { RecipeStartComponent } from './recipe/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipe/recipe-edit/recipe-edit.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { RecipeEditComponent } from './recipe/recipe-edit/recipe-edit.component'
     RecipeStartComponent,
     RecipeEditComponent,
   ],
-  imports: [BrowserModule, RouterModule.forRoot(routes)],
+  imports: [BrowserModule, RouterModule.forRoot(routes), FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
