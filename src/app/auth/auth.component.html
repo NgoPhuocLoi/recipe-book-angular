@@ -1,0 +1,52 @@
+<div class="row justify-content-center mt-3">
+  <div class="col-6">
+    <div class="alert alert-warning" role="alert" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
+
+    <form #authForm="ngForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input
+          type="email"
+          class="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+          ngModel
+          name="email"
+          required
+          email
+        />
+        <div id="emailHelp" class="form-text">
+          We'll never share your email with anyone else.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="exampleInputPassword1"
+          ngModel
+          name="password"
+          required
+          minlength="6"
+        />
+      </div>
+
+      <div>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="!authForm.valid"
+        >
+          {{ isLogin ? "Login" : "Register" }}
+        </button>
+        |
+        <button class="btn btn-primary" (click)="switchAuthMode()">
+          Switch to {{ isLogin ? "register" : "login" }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

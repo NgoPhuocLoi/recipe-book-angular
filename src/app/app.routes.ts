@@ -6,8 +6,13 @@ import { recipeDetailResolver } from './recipe/recipe-detail/recipe-detail.resol
 import { RecipeListComponent } from './recipe/recipe-list/recipe-list.component';
 import { RecipeStartComponent } from './recipe/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipe/recipe-edit/recipe-edit.component';
+import { AuthComponent } from './auth/auth.component';
 
 export const routes: Routes = [
+  {
+    path: 'auth',
+    component: AuthComponent,
+  },
   {
     path: '',
     redirectTo: 'recipe',
