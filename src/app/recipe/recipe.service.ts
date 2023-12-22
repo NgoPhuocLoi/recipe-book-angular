@@ -1,42 +1,37 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { EventEmitter, Injectable, inject } from '@angular/core';
 import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
-import { Subject } from 'rxjs';
+import { Subject, map } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export default class RecipeService {
+  private RECIPE_URL =
+    'https://learn-angular-d8a81-default-rtdb.asia-southeast1.firebasedatabase.app/recipes.json';
   private recipesStateSubject = new Subject<Recipe[]>();
   recipesState = this.recipesStateSubject.asObservable();
+  private http = inject(HttpClient);
 
-  public recipes: Recipe[] = [
-    new Recipe(
-      1,
-      'Recipe 1',
-      'Description of recipe 1',
-      'https://i2.wp.com/www.downshiftology.com/wp-content/uploads/2018/12/Shakshuka-19.jpg',
-      [
-        new Ingredient('Ingredient 1', 10),
-        new Ingredient('Ingredient 2', 5),
-        new Ingredient('Ingredient 3', 8),
-      ]
-    ),
-    new Recipe(
-      2,
-      'Recipe 2',
-      'Description of recipe 2',
-      'https://www.simplyrecipes.com/thmb/KRw_r32s4gQeOX-d07NWY1OlOFk=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Homemade-Pizza-Dough-Lead-Shot-1c-c2b1885d27d4481c9cfe6f6286a64342.jpg'
-    ),
-  ];
+  public recipes: Recipe[] = [];
 
   getRecipes() {
-    return this.recipes.slice();
+    this.http.get(this.RECIPE_URL).subscribe((res) => {
+      for (let key in res) {
+        console.log(key);
+        this.recipes.push(res[key]);
+      }
+      this.recipesStateSubject.next(this.recipes);
+    });
   }
 
   addRecipe(recipe: Recipe) {
-    this.recipes.push(recipe);
-    this.recipesStateSubject.next(this.recipes);
+    this.http.post(this.RECIPE_URL, recipe).subscribe((res) => {
+      console.log(res);
+      this.recipes.push(recipe);
+      this.recipesStateSubject.next(this.recipes);
+    });
   }
 
   getById(id: number) {
