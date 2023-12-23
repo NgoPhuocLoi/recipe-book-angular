@@ -22,7 +22,7 @@ export class RecipeEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((param) => {
-      this.editedRecipe = this.recipeService.getById(+param['id']);
+      this.editedRecipe = this.recipeService.getById(param['id']);
       this.editMode = !!param['id'];
     });
     this.initForm();
@@ -60,7 +60,7 @@ export class RecipeEditComponent implements OnInit {
 
   onSubmit() {
     const recipe = new Recipe(
-      this.recipeService.recipes.length + 1,
+      // this.recipeService.recipes.length + 1,
       this.recipeForm.value.name,
       this.recipeForm.value.description,
       this.recipeForm.value.imagePath,
@@ -88,7 +88,7 @@ export class RecipeEditComponent implements OnInit {
     this.recipeService.addRecipe(recipe);
   }
 
-  private updateRecipe(id: number, updatedRecipe: Recipe) {
+  private updateRecipe(id: string, updatedRecipe: Recipe) {
     this.recipeService.updateRecipeById(id, updatedRecipe);
     this.editMode = false;
   }

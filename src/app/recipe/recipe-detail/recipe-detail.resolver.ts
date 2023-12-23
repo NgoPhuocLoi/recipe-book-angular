@@ -5,6 +5,6 @@ import RecipeService from '../recipe.service';
 
 export const recipeDetailResolver: ResolveFn<Recipe> = (route, state) => {
   const recipeService = inject(RecipeService);
-
-  return recipeService.getById(+route.params['id']);
+  console.log(1);
+  return recipeService.getById(route.params['id']);
 };

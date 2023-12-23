@@ -1,6 +1,8 @@
 import { Component, ViewChild, inject } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AuthService } from './auth.service';
+import { AuthResponse, AuthService } from './auth.service';
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -13,6 +15,7 @@ export class AuthComponent {
   errorMessage: string = null;
   @ViewChild('authForm', { static: true }) authForm: NgForm;
   private authService = inject(AuthService);
+  private router = inject(Router);
 
   switchAuthMode() {
     this.isLogin = !this.isLogin;
@@ -22,18 +25,24 @@ export class AuthComponent {
     if (!this.authForm.valid) return;
 
     this.loading = true;
-    if (this.isLogin) {
-    } else {
-      this.authService.register(this.authForm.value).subscribe({
-        next: (res) => {
-          console.log(res);
-        },
-        error: (err) => {
-          console.log(err.message);
-          this.errorMessage = err.message;
-        },
-      });
-    }
+    let authObservale: Observable<any>;
+
+    authObservale = this.isLogin
+      ? this.authService.login(this.authForm.value)
+      : this.authService.register(this.authForm.value);
+
+    authObservale.subscribe({
+      next: (res) => {
+        console.log(res);
+        if (this.isLogin) {
+          this.router.navigateByUrl('/recipes');
+        }
+      },
+      error: (err) => {
+        console.log(err.message);
+        this.errorMessage = err.message;
+      },
+    });
     this.loading = false;
 
     this.authForm.reset();

@@ -17,12 +17,13 @@ export default class RecipeService {
   public recipes: Recipe[] = [];
 
   getRecipes() {
+    // console.log(2);
     this.http.get(this.RECIPE_URL).subscribe((res) => {
       for (let key in res) {
-        console.log(key);
-        this.recipes.push(res[key]);
+        this.recipes.push({ ...res[key], id: key });
       }
       this.recipesStateSubject.next(this.recipes);
+      console.log(this.recipes);
     });
   }
 
@@ -34,16 +35,16 @@ export default class RecipeService {
     });
   }
 
-  getById(id: number) {
+  getById(id: string) {
     return this.recipes.find((r) => r.id === id);
   }
 
-  updateRecipeById(id: number, updatedRecipe: Recipe) {
+  updateRecipeById(id: string, updatedRecipe: Recipe) {
     this.recipes = this.recipes.map((r) => (r.id === id ? updatedRecipe : r));
     this.recipesStateSubject.next(this.recipes);
   }
 
-  deleteById(id: number) {
+  deleteById(id: string) {
     this.recipes = this.recipes.filter((r) => r.id !== id);
     this.recipesStateSubject.next(this.recipes);
   }

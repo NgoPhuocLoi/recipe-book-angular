@@ -29,7 +29,7 @@ export class RecipeDetailComponent {
   }
 
   onDelete() {
-    this.recipeService.deleteById(+this.route.snapshot.params['id']);
+    this.recipeService.deleteById(this.route.snapshot.params['id']);
     this.router.navigateByUrl('/recipe');
   }
 }

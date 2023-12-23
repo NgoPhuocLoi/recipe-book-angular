@@ -15,7 +15,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" routerLinkActive="active" routerLink="/recipe"
+        <a class="nav-link" routerLinkActive="active" routerLink="/recipes"
           >Recipes</a
         >
       </li>
@@ -43,6 +43,17 @@
           <li><hr class="dropdown-divider" /></li>
           <li><a class="dropdown-item" href="#">Something else here</a></li>
         </ul>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item">
+        @if(isAuthenticated){
+        <button class="btn btn-danger" (click)="onLogout()">Logout</button>
+
+        }@else {
+        <a routerLink="/auth" class="btn btn-primary">Login</a>
+        }
       </li>
     </ul>
   </div>
