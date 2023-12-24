@@ -1,43 +1,26 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { RecipeDetailComponent } from './recipe/recipe-detail/recipe-detail.component';
-import { RecipeItemComponent } from './recipe/recipe-item/recipe-item.component';
-import { RecipeListComponent } from './recipe/recipe-list/recipe-list.component';
-import { ShoppingEditComponent } from './shopping/shopping-edit/shopping-edit.component';
-import { ShoppingListComponent } from './shopping/shopping-list/shopping-list.component';
-import { RecipeComponent } from './recipe/recipe.component';
-import { RouterModule } from '@angular/router';
-import { routes } from './app.routes';
-import { RecipeStartComponent } from './recipe/recipe-start/recipe-start.component';
-import { RecipeEditComponent } from './recipe/recipe-edit/recipe-edit.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 import { AuthComponent } from './auth/auth.component';
+import { HeaderComponent } from './header/header.component';
 import { httpInterceptorProviders } from './http-interceptors';
+import { RecipeModule } from './recipe/recipe.module';
+import { ShoppingModule } from './shopping/shopping.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    ShoppingListComponent,
-    RecipeListComponent,
-    RecipeItemComponent,
-    RecipeDetailComponent,
-    ShoppingEditComponent,
-    RecipeComponent,
-    RecipeStartComponent,
-    RecipeEditComponent,
-    AuthComponent,
-  ],
+  declarations: [AppComponent, HeaderComponent, AuthComponent],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes),
+    AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    RecipeModule,
+    ShoppingModule,
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],
